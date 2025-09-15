@@ -73,7 +73,7 @@ nvidia-stock-etl/
 
 ### 1️⃣ Clone repo
 ```bash
-git clone https://github.com/YOUR_USERNAME/nvidia-stock-etl.git
+git clone https://github.com/Manh-Hien/nvidia-stock-etl.git
 cd nvidia-stock-etl
 ```
 
