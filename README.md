@@ -39,34 +39,35 @@ An **end-to-end ETL pipeline** that extracts **NVIDIA (NVDA)** stock data, trans
 ---
 
 ## 📂 Project Structure
+```bash
 nvidia-stock-etl/
-│── config/
-│ └── settings.py # ETL configuration (DB path, ticker, etc.)
+│── pipeline.py              # Main ETL entry point
 │
-│── etl/
-│ ├── init.py
-│ ├── utils.py # Logging & helpers
-│ ├── extract.py # Stock extraction
-│ ├── transform.py # Indicators & transforms
-│ ├── load.py # Load into SQLite
+│── config/                  # Configuration settings
+│   ├── __init__.py
+│   └── settings.py
 │
-│── etl/tests/
-│ └── test_transform.py # Example Pytest unit test
+│── etl/                     # Core ETL modules
+│   ├── __init__.py
+│   ├── utils.py             # Logging & helpers
+│   ├── extract.py           # Stock extraction logic
+│   ├── transform.py         # Add indicators (SMA, EMA, returns, etc.)
+│   └── load.py              # Save data to SQLite
 │
-│── database/ # SQLite DB stored here
-│ └── nvidia_stock.db
+│── tests/                   # Unit tests
+│   └── test_transform.py
 │
-│── pipeline.py # Main ETL pipeline entry point
+│── database/                # SQLite database storage
+│   └── (auto-created) nvidia_stock.db
 │
-│── .github/workflows/
-│ └── ci.yml # CI/CD pipeline
+│── .github/workflows/       # GitHub Actions CI/CD
+│   └── ci.yml
 │
-│── requirements.txt
+│── requirements.txt         # Python dependencies
 │── README.md
 │── .gitignore
+```
 
-
----
 
 ## ⚡ Quick Start
 
