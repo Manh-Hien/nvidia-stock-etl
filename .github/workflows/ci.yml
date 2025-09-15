@@ -1,0 +1,39 @@
+name: ETL CI
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "30 20 * * 1-5" # Weekdays 20:30 UTC (~after US market close)
+
+jobs:
+  run-etl:
+    runs-on: ubuntu-latest
+    env:
+      PYTHONPATH: .
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+          cache-dependency-path: requirements.txt
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run unit tests
+        run: pytest -q
+
+      - name: Run ETL
+        run: python pipeline.py
+
+      - name: Upload SQLite DB artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: nvidia_stock_db
+          path: database/nvidia_stock.db
